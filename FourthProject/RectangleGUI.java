@@ -1,3 +1,15 @@
+/*
+============================================================================
+FILE :	RectangleGUI.java
+AUTHOR : Chrys Sean T. Sevilla
+DESCRIPTION : A program that gets the area and perimeter of a rectangle. 
+COPYRIGHT : 16-09-2024
+REVISION HISTORY
+Date: By: Description:
+
+============================================================================
+*/
+
 import javax.swing.JOptionPane;
 
 public class RectangleGUI {
