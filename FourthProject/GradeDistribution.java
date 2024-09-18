@@ -11,6 +11,7 @@ Date: By: Description:
 */
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Class that represents a grade distribution for a course.
@@ -55,7 +56,8 @@ public class GradeDistribution {
 
     /**
      * Precondition: User input must be non-negative integers for each grade.
-     * Postcondition: Reads the number of grades for A, B, C, D, and F from user input.
+     * Postcondition: Reads the number of grades for A, B, C, D, and F from user
+     * input.
      */
     public void readInput() {
         Scanner keyboard = new Scanner(System.in);
@@ -234,7 +236,7 @@ public class GradeDistribution {
      * Precondition: The total number of grades must be greater than 0.
      * Postcondition: Prints a bar for a particular grade.
      * 
-     * @param grade the grade (A, B, C, D, F)
+     * @param grade      the grade (A, B, C, D, F)
      * @param gradeCount the number of grades
      */
     private void printBar(char grade, int gradeCount) {
@@ -246,5 +248,77 @@ public class GradeDistribution {
             System.out.print("*");
         }
         System.out.println(" (" + Math.round(percentage) + "%)");
+    }
+
+    // Method to calculate the percentage of a particular grade
+    /**
+     * Precondition: The total number of grades is greater than 0.
+     * Postcondition: Returns the percentage of a specific grade based on the total
+     * number of grades.
+     * If the total number of grades is 0, the program displays an error message and
+     * exits.
+     *
+     * @param numGrades The number of students who received a particular grade.
+     * @return The percentage of the given grade as a double.
+     */
+    public double getPercentage2(int numGrades) {
+        double total = getTotalGrades();
+        double percentage = 0;
+
+        if (total == 0) {
+            JOptionPane.showMessageDialog(null, "ERROR: Total Grades is 0. Division by 0.");
+            System.exit(0);
+        } else {
+            percentage = (numGrades * 100) / total;
+        }
+
+        return percentage;
+    }
+
+    // Method to create the bar graph as a string
+    /**
+     * Precondition: The grade distribution (A, B, C, D, F) has been set.
+     * Postcondition: Returns a string representation of the grade distribution bar
+     * graph.
+     * 
+     * @return A string that represents the bar graph of grade distribution.
+     */
+    public String createBarGraph2() {
+        StringBuilder barGraph = new StringBuilder();
+        barGraph.append("Grade Distribution Bar Graph:\n\n");
+
+        barGraph.append(printBar2('A', gradeA));
+        barGraph.append(printBar2('B', gradeB));
+        barGraph.append(printBar2('C', gradeC));
+        barGraph.append(printBar2('D', gradeD));
+        barGraph.append(printBar2('F', gradeF));
+
+        return barGraph.toString();
+    }
+
+    // Helper method to print each bar of the graph
+    /**
+     * Precondition: The gradeCount is a non-negative integer and the grade is a
+     * valid grade character ('A', 'B', 'C', 'D', or 'F').
+     * Postcondition: Returns a string that represents a bar for the given grade
+     * based on the percentage of the total.
+     * 
+     * @param grade      The grade character ('A', 'B', 'C', 'D', or 'F').
+     * @param gradeCount The number of students who received the specified grade.
+     * @return A string that represents a bar in the grade distribution bar graph.
+     */
+    private String printBar2(char grade, int gradeCount) {
+        double percentage = getPercentage(gradeCount);
+        int numAsterisks = (int) Math.round((percentage * 50) / 100); // 1 asterisk represents 2%
+
+        StringBuilder bar = new StringBuilder();
+        bar.append(grade).append(": ");
+        for (int i = 0; i < numAsterisks; i++) {
+            bar.append("*");
+        }
+        bar.append(" (").append(Math.round(percentage)).append("%)\n");
+        bar.append("Number of asterisks: ").append(numAsterisks).append("\n");
+
+        return bar.toString();
     }
 }
