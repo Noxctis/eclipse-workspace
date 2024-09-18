@@ -308,7 +308,7 @@ public class GradeDistribution {
      * @return A string that represents a bar in the grade distribution bar graph.
      */
     private String printBar2(char grade, int gradeCount) {
-        double percentage = getPercentage(gradeCount);
+        double percentage = getPercentage2(gradeCount);
         int numAsterisks = (int) Math.round((percentage * 50) / 100); // 1 asterisk represents 2%
 
         StringBuilder bar = new StringBuilder();
