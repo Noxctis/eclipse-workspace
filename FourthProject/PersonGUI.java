@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class PersonGUI {
     public static void main(String[] args) {
         // Collect data for person1
-        String name1 = JOptionPane.showInputDialog("Enter the name of the first person:");
+        String name1 = getValidName("Enter the name of the first person:");
         if (name1 == null) { // Handle cancellation
             System.exit(0);
         }
@@ -23,7 +23,7 @@ public class PersonGUI {
         Person person1 = new Person(name1, age1);
 
         // Collect data for person2
-        String name2 = JOptionPane.showInputDialog("Enter the name of the second person:");
+        String name2 =  getValidName("Enter the name of the second person:");
         if (name2 == null) { // Handle cancellation
             System.exit(0);
         }
@@ -53,8 +53,13 @@ public class PersonGUI {
         JOptionPane.showMessageDialog(null, output);
     }
 
-    // Helper method to validate age input and handle cancellation
-    public static int getValidAge(String prompt) {
+    /**
+     * Precondition: A valid string is passed as arguments.
+     * Postcondition: Returns a valid and non-negative integer
+     * @param message The message on what to input into the GUI.
+     * @return Value A valid and non-negative integer.
+     */
+    private static int getValidAge(String prompt) {
         int age = -1;
         boolean valid = false;
         
@@ -77,4 +82,35 @@ public class PersonGUI {
 
         return age;
     }
+    
+    /**
+     * Precondition: A valid string is passed as arguments.
+     * Postcondition: Returns a valid non-empty string
+     * @param message The message on what to input into the GUI.
+     * @return name A valid and non-empty string.
+     */
+    private static String getValidName(String prompt) {
+        String name = "";
+        boolean valid = false;
+        
+        while (!valid) {
+            String nameStr = JOptionPane.showInputDialog(prompt);
+            if (nameStr == null) { // Handle cancellation
+                System.exit(0);
+            }
+            try {
+                name = nameStr;
+                if (!name.isEmpty()) {
+                    valid = true; // Valid non-negative integer
+                } else {
+                    JOptionPane.showMessageDialog(null, "Name cannot be Blank. Please try again.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a name.");
+            }
+        }
+
+        return name;
+    }
+    
 }

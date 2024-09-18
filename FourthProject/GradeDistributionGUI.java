@@ -114,6 +114,7 @@ public class GradeDistributionGUI {
             bar.append("*");
         }
         bar.append(" (" + Math.round(percentage) + "%)\n");
+        bar.append("Number of asterisks: " + numAsterisks + "\n");
         return bar.toString();
     }
 

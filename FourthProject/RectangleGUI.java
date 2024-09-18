@@ -45,7 +45,14 @@ public class RectangleGUI {
     }
 
     // Helper method to get and validate input for width and height
-    public static double getValidatedInput(String message) {
+    
+    /**
+     * Precondition: A valid string is passed as arguments.
+     * Postcondition: Returns a valid and non-negative integer
+     * @param message The message on what to input into the GUI.
+     * @return value A valid and non-negative integer.
+     */
+    private static double getValidatedInput(String message) {
         double value = 0;
         while (true) {
             try {
