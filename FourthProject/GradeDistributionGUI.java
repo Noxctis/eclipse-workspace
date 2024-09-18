@@ -1,6 +1,6 @@
 /*
 ============================================================================
-FILE :	GradeDistributionGUI.java
+FILE :  GradeDistributionGUI.java
 AUTHOR : Chrys Sean T. Sevilla
 DESCRIPTION : A program that represents a grade distribution for a given course. 
 COPYRIGHT : 16-09-2024
@@ -17,28 +17,51 @@ public class GradeDistributionGUI {
     public static void main(String[] args) {
         GradeDistribution distribution = new GradeDistribution();
 
-        // Get input from the user using JOptionPane
-        try {
-            String inputA = JOptionPane.showInputDialog("Enter the number of A grades:");
-            distribution.setGradeA(Integer.parseInt(inputA));
+        // Continuously ask for input until valid values are entered
+        int gradeA = getValidGrade("Enter the number of A grades:");
+        distribution.setGradeA(gradeA);
 
-            String inputB = JOptionPane.showInputDialog("Enter the number of B grades:");
-            distribution.setGradeB(Integer.parseInt(inputB));
+        int gradeB = getValidGrade("Enter the number of B grades:");
+        distribution.setGradeB(gradeB);
 
-            String inputC = JOptionPane.showInputDialog("Enter the number of C grades:");
-            distribution.setGradeC(Integer.parseInt(inputC));
+        int gradeC = getValidGrade("Enter the number of C grades:");
+        distribution.setGradeC(gradeC);
 
-            String inputD = JOptionPane.showInputDialog("Enter the number of D grades:");
-            distribution.setGradeD(Integer.parseInt(inputD));
+        int gradeD = getValidGrade("Enter the number of D grades:");
+        distribution.setGradeD(gradeD);
 
-            String inputF = JOptionPane.showInputDialog("Enter the number of F grades:");
-            distribution.setGradeF(Integer.parseInt(inputF));
+        int gradeF = getValidGrade("Enter the number of F grades:");
+        distribution.setGradeF(gradeF);
 
-            // Create the bar graph and display it using JOptionPane
-            String result = distribution.createBarGraph2();
-            JOptionPane.showMessageDialog(null, result);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid input! Please enter valid integers.");
+        // Create the bar graph and display it using JOptionPane
+        String result = distribution.createBarGraph2();
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    /**
+     * Continuously prompts the user for a valid non-negative integer input
+     * @param message The message to display in the input dialog
+     * @return A valid non-negative integer entered by the user
+     */
+    private static int getValidGrade(String message) {
+        int grade = -1;
+        boolean validInput = false;
+        
+        while (!validInput) {
+            try {
+                String input = JOptionPane.showInputDialog(message);
+                grade = Integer.parseInt(input);
+                
+                if (grade < 0) {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a non-negative integer.");
+                } else {
+                    validInput = true;  // Input is valid, exit loop
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid integer.");
+            }
         }
+
+        return grade;
     }
 }

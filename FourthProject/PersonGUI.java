@@ -23,7 +23,7 @@ public class PersonGUI {
         Person person1 = new Person(name1, age1);
 
         // Collect data for person2
-        String name2 =  getValidName("Enter the name of the second person:");
+        String name2 = getValidName("Enter the name of the second person:");
         if (name2 == null) { // Handle cancellation
             System.exit(0);
         }
@@ -101,7 +101,7 @@ public class PersonGUI {
             try {
                 name = nameStr;
                 if (!name.isEmpty()) {
-                    valid = true; // Valid non-negative integer
+                    valid = true; // Valid non-empty string
                 } else {
                     JOptionPane.showMessageDialog(null, "Name cannot be Blank. Please try again.");
                 }
