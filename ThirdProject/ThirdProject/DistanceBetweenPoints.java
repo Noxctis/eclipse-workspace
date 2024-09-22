@@ -1,3 +1,19 @@
+/*
+============================================================================
+FILE : ChangeDenomination.java
+AUTHOR : Chrys Sean T. Sevilla
+DESCRIPTION : Prompts the user to enter two points (x1, y1) and (x2, y2) and displays their distance.
+COPYRIGHT : 02-09-2024
+REVISION HISTORY
+Date: By: Description:
+revision date author description of the change
+revision date author description of the change
+.
+.
+.
+revision date author description of the change
+============================================================================
+*/
 
 package ThirdProject;
 
