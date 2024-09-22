@@ -1,6 +1,6 @@
 /*
 ============================================================================
-FILE : ChangeDenomination.java
+FILE : DistanceBetweenPoints.java
 AUTHOR : Chrys Sean T. Sevilla
 DESCRIPTION : Prompts the user to enter two points (x1, y1) and (x2, y2) and displays their distance.
 COPYRIGHT : 02-09-2024
