@@ -141,15 +141,4 @@ public class HextoDec {
         String hexResult = convertToHexadecimal();
         JOptionPane.showMessageDialog(null,"Decimal Number: " + num + "\nHexadecimal Number: " + hexResult, "Hexadecimal to Decimal Result", JOptionPane.INFORMATION_MESSAGE);
     }
-
-    public static void main(String[] args) {
-        // Create an object of the class
-        HextoDec hexConverter = new HextoDec();
-
-        // Read decimal input
-        hexConverter.readInput();
-
-        // Display the result
-        hexConverter.displayResult();
-    }
 }
