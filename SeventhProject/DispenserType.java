@@ -37,11 +37,14 @@ public class DispenserType {
     }
 
     /**
-     * Decreases the number of items by one (for one sale).
+     * Decreases the number of items by the given quantity (for one sale).
+     * @param quantity The number of items sold
      */
-    public void makeSale() {
-        if (numberOfItems > 0) {
-            numberOfItems--;
+    public void makeSale(int quantity) {
+        if (numberOfItems >= quantity) {
+            numberOfItems -= quantity;
+        } else {
+            throw new IllegalArgumentException("Not enough items in stock!");
         }
     }
 }

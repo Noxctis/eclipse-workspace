@@ -2,18 +2,24 @@ public class CashRegister {
     private int cashOnHand;
 
     /**
-     * Default constructor. Sets the cash register to 500 cents.
+     * Default constructor. Sets the cash in the register to 500 cents.
      */
     public CashRegister() {
         this.cashOnHand = 500;
     }
 
     /**
-     * Constructor with parameter. Sets the cash register to a custom amount.
-     * @param cashIn Initial cash in the register
+     * Accepts the deposited amount from the customer and returns the change if necessary.
+     * @param amountDeposited The amount deposited by the customer
+     * @param cost The total cost of the product(s)
+     * @return The change to return to the customer
      */
-    public CashRegister(int cashIn) {
-        this.cashOnHand = cashIn;
+    public int acceptAmount(int amountDeposited, int cost) {
+        if (amountDeposited >= cost) {
+            cashOnHand += cost;
+            return amountDeposited - cost; // Return the change
+        }
+        return 0;
     }
 
     /**
@@ -22,13 +28,5 @@ public class CashRegister {
      */
     public int getCurrentBalance() {
         return cashOnHand;
-    }
-
-    /**
-     * Accepts the amount deposited by the customer.
-     * @param amountIn The amount deposited by the customer
-     */
-    public void acceptAmount(int amountIn) {
-        cashOnHand += amountIn;
     }
 }
