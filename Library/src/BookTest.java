@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class BookTest {
     public static void main(String[] args) {
         // Create a loop to add multiple books
-        try (/*         Scanner scanner = new Scanner(System.in);
+        /*         Scanner scanner = new Scanner(System.in);
         // Create individual book instances
         Book book1 = new Book("Charlotte’s Web", "Classic", 150);
         Book book2 = new Book("Holy Bible", "Religion", 1000);
@@ -33,7 +33,8 @@ public class BookTest {
         // Display total number of books
         Book.displayTotalBooks();
         scanner.close();
-         */ Scanner scanner = new Scanner(System.in)) {
+         */ 
+        try (Scanner scanner = new Scanner(System.in)) {
             // Create a loop to add multiple books
             while (true) {
                 System.out.println("Enter book details:");
