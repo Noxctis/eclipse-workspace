@@ -30,51 +30,77 @@ public class BookTest {
         System.out.println("The genre with the highest count is: " + highestGenre + ".");
         // Display total number of books
         Book.displayTotalBooks();
-        /* try (Scanner scanner = new Scanner(System.in)) {
-            // Create a loop to add multiple books
+        
+        /*Scanner scanner = new Scanner(System.in);
+        
+        // Create a loop to add multiple books
+        while (true) {
+            System.out.println("Enter book details:");
+
+            // User input for title
+            System.out.print("Title: ");
+            String title = scanner.nextLine().trim();
+            while (title.isEmpty()) {
+                System.out.print("Title cannot be empty. Please enter a valid title: ");
+                title = scanner.nextLine().trim();
+            }
+            
+            // User input for genre with validation
+            String genre;
             while (true) {
-                System.out.println("Enter book details:");
-                
-                // User input for title, genre, and number of pages
-                System.out.print("Title: ");
-                String title = scanner.nextLine();
-                
                 System.out.print("Genre (Reference, Classic, Religion): ");
-                String genre = scanner.nextLine();
-                
-                System.out.print("Number of pages: ");
-                int pages = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
-                
-                // Create a new book instance
-                Book book = new Book(title, genre, pages);
-                
-                // Display the added book
-                System.out.println("Book added:");
-                book.displayBook();
-                
-                // Ask user if they want to add another book
-                System.out.print("Do you want to add another book? (yes/no): ");
-                String response = scanner.nextLine();
-                if (!response.equalsIgnoreCase("yes")) {
-                    break; // Exit the loop if the user doesn't want to add more books
+                genre = scanner.nextLine().trim();
+                if (genre.equalsIgnoreCase("Reference") || 
+                    genre.equalsIgnoreCase("Classic") || 
+                    genre.equalsIgnoreCase("Religion")) {
+                    break; // Valid genre
+                } else {
+                    System.out.println("Invalid genre. Please enter one of the following: Reference, Classic, Religion.");
                 }
             }
             
-            // Display total number of books
-            Book.displayTotalBooks();
-            
-            // Find and display the book with the most pages
-            // This example assumes at least one book has been added
-            // You can also track the most pages dynamically if needed
-            // Here, we'll need to modify to store books if desired
-            
-            // Ask the user to input the books again or use previous logic for max pages
-            // For now, this section will just display the genre with the highest count
-            String highestGenre = Book.getHighestGenre();
-            System.out.println("The genre with the highest count is: " + highestGenre + ".");
+            // User input for number of pages with validation
+            int pages = 0;
+            while (true) {
+                System.out.print("Number of pages: ");
+                if (scanner.hasNextInt()) {
+                    pages = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
+                    if (pages > 0) {
+                        break; // Valid pages
+                    } else {
+                        System.out.println("Number of pages must be greater than 0.");
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a number.");
+                    scanner.next(); // Clear invalid input
+                }
             }
-            */
+
+            // Create a new book instance
+            Book book = new Book(title, genre, pages);
+
+            // Display the added book
+            System.out.println("Book added:");
+            book.displayBook();
+
+            // Ask user if they want to add another book
+            System.out.print("Do you want to add another book? (yes/no): ");
+            String response = scanner.nextLine();
+            if (!response.equalsIgnoreCase("yes")) {
+                break; // Exit the loop if the user doesn't want to add more books
+            }
+        }
+
+        // Display total number of books
+        Book.displayTotalBooks();
+
+        // Determine and display the genre with the highest count
+        String highestGenre = Book.getHighestGenre();
+        System.out.println("The genre with the highest count is: " + highestGenre + ".");
+
+        scanner.close();
+        */
          
     }
 }
