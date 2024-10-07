@@ -8,6 +8,7 @@ public class Book {
     private static int numReference = 0;
     private static int numClassic = 0;
     private static int numReligion = 0;
+    private static int highestPages = 0;
 
     // Constructor with default values
     public Book() {
