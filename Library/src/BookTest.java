@@ -3,7 +3,7 @@ public class BookTest {
     public static void main(String[] args) {
         // Create a loop to add multiple books;
         // Create individual book instances
-        Book book1 = new Book("Charlotte’s Web", "Classic", 150);
+        Book book1 = new Book("Charlotte's Web", "Classic", 150);
         Book book2 = new Book("Holy Bible", "Religion", 1000);
         Book book3 = new Book("Bible History", "Religion", 300);
         Book book4 = new Book("My First Atlas", "Reference", 200);
