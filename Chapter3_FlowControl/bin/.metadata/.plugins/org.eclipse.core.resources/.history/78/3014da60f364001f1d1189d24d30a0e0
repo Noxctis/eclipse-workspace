@@ -1,0 +1,33 @@
+package ThirdProject;
+import java.util.Scanner;
+
+public class ChangeDenomination {
+	
+	public static void main(String[] args) {
+		//declare constant
+		final int DIME = 10;
+		final int NICKEL = 5;
+		final int PENNY = 1;
+		
+		//declaration of variables
+		int amount = 0, originalAmount;
+		int Quarter = 0, Dime = 0,Nickel = 0,Penny = 0;
+		
+	
+		Scanner keyInput = new Scanner(System.in);
+		
+		System.out.println("Enter amount (from 1-99 cents) :");
+		String s1 = keyInput.nextLine();
+		int originalAmount = Integer.parseInt(s1);
+		if (originalAmount > 0 && originalAmount < 100) {
+			  System.out.println("It is from 1-99 cents");
+			  while (i < 5) {
+				  System.out.println(i);
+				  i++;
+				}
+			}
+		else {
+			System.out.println("Wrong Input!");
+		}
+	}
+}

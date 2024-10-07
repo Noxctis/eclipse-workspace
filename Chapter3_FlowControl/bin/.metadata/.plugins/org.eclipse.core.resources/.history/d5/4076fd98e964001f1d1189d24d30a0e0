@@ -1,0 +1,13 @@
+public class EggBasket{
+	public static void main(String[] args) {
+		int eggsPerBasket = 6;
+		int numberOfBasket = 10;
+		int eggsTotal;
+		
+		eggsTotal = eggsPerBasket * numberOfBasket;
+	
+	System.out.println("if you have");
+	System.out.println("if you have");
+	
+}
+}

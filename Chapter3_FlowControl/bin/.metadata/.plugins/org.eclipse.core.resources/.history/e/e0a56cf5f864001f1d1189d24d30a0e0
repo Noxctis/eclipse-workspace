@@ -1,0 +1,52 @@
+/*
+============================================================================
+FILE : MultiplytheDigits.java
+AUTHOR : Chrys Sean T. Sevilla
+DESCRIPTION : Determines the change to be dispenses from a vending machine. The user enters an amount between 1 cent and 99 cents. The program determines a combination of coins equal to that amount. Denominations is in a formed of: quarter, dime, nickel and penny.
+COPYRIGHT : 28-08-2024
+REVISION HISTORY
+Date: By: Description:
+revision date author description of the change
+revision date author description of the change
+.
+.
+.
+revision date author description of the change
+============================================================================
+*/
+
+package ThirdProject;
+import java.util.Scanner;
+
+public class MultiplytheDigits {
+	
+	public static void main(String[] args) {
+		
+		//declaration of variables
+		String s1;
+		int n1 = 0, n2 = 0,n3 = 0,originalAmount,answer;
+		
+	
+		Scanner keyInput = new Scanner(System.in);
+		
+		System.out.println("Enter amount (from 0-1000 cents) :");
+		s1 = keyInput.nextLine();
+		originalAmount = Integer.parseInt(s1);
+		if (originalAmount >= 0 && originalAmount <= 1000) { //input validation from 1-99 cents
+			  System.out.println("It is from 0-1000 cents");
+				  
+			  n1 = (originalAmount/100)%10;
+			  n2 = (originalAmount/10)%10;
+			  n3 = (originalAmount%10);
+			  System.out.println(n1); // error message
+			  System.out.println(n2); // error message
+			  System.out.println(n3); // error message
+			  answer = n1*n2*n3;
+			  System.out.println(answer); // error message
+			}
+		else {
+			System.out.println("Wrong Input!"); // error message
+		}
+		keyInput.close();
+	}
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="Chapter3_FlowControl/Chapter3_FlowControl/Branch/|SecondProject/|Chapter3_FlowControl/Chapter3_FlowControl/Loops/|ThirdProject/" kind="src" path=""/>
+	<classpathentry kind="src" path="Chapter3_FlowControl/Chapter3_FlowControl/Branch"/>
+	<classpathentry kind="src" path="Chapter3_FlowControl/Chapter3_FlowControl/Loops"/>
+	<classpathentry kind="src" path="SecondProject"/>
+	<classpathentry kind="src" path="ThirdProject"/>
+	<classpathentry kind="output" path="Chapter3_FlowControl/bin"/>
+</classpath>
