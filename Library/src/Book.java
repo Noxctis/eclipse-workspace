@@ -68,8 +68,6 @@ public class Book {
             case "Religion":
                 numReligion++;
                 break;
-            default :
-            break;
         }
     }
 
