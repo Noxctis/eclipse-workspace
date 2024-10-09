@@ -35,11 +35,11 @@ public class Election {
     }
     
     private void calculatePercentTotalVotes() {
-    	candidate1votes = (candidate1.getVotesReceived()/19300)*100;
-    	candidate2votes = (candidate2.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate3votes = (candidate3.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate4votes = (candidate4.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate5votes = (candidate5.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+    	candidate1votes = ((double)candidate1.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+    	candidate2votes = ((double)candidate2.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+    	candidate3votes = ((double)candidate3.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+    	candidate4votes = ((double)candidate4.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+    	candidate5votes = ((double)candidate5.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
     }
     
     
