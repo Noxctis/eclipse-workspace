@@ -1,4 +1,4 @@
-
+package oldelection;
 public class Candidate {
 
 	   	private String surName;
