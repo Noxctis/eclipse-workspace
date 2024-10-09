@@ -4,15 +4,19 @@ public class ElectionTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Election election1 = new Election();
+        // Instantiate candidate objects using non-default constructor
+        Candidate candidate1 = new Candidate("Johnson", 5000);
+        Candidate candidate2 = new Candidate("Miller", 4000);
+        Candidate candidate3 = new Candidate("Duffy", 6000);
+        Candidate candidate4 = new Candidate("Robinson", 2500);
+        Candidate candidate5 = new Candidate("Ashton", 1800);
 
-        //System.out.println(student5.getName() + " " + student5.getGPA() + " " + student5.getCreditAmount());
-        //student5.displayDetails();
-        
-        System.out.printf("%-30s %-20s %-15s%n", "Candidate", "Votes Received", "% of Total Votes");
-   
-        election1.displayResults();
-        System.out.println("Total" + "                          " + Candidate.getTotalNumberVotes());
+        // Create an election object and pass the candidates
+        Election election = new Election(candidate1, candidate2, candidate3, candidate4, candidate5);
+
+        // Display the election results
+        election.displayResults();
+
         scanner.close();
     }
 }

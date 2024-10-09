@@ -1,45 +1,44 @@
-
 public class Candidate {
 
-	   	private String surName;
-	    private int votesReceived;
-	    
-	    private static int numberTotalVotes = 0;
-	    
-	    public Candidate() {
-	        this.surName = "";
-	        this.votesReceived = 0;
-	    }
+    private String surname;
+    private int votesReceived;
 
-	    public Candidate(String newSurname, int newNumberOfVotes) {
-	    	this.surName = newSurname;
-	        this.votesReceived = newNumberOfVotes;
-	        updateTotalNumberVotes(newNumberOfVotes);
-	    }
+    private static int totalVotes = 0;  // Keeps track of total votes across all candidates
 
-	    public String getSurname() {
-	        return surName;
-	    }
+    // Default constructor
+    public Candidate() {
+        this.surname = "";
+        this.votesReceived = 0;
+    }
 
-	    public void setSurname(String newSurname) {
-	        this.surName = newSurname;
-	    }
-	    
+    // Non-default constructor
+    public Candidate(String surname, int votesReceived) {
+        this.surname = surname;
+        this.votesReceived = votesReceived;
+        Candidate.totalVotes += votesReceived;  // Update total votes when candidate is created
+    }
 
-	    public int getVotesReceived() {
-	        return votesReceived;
-	    }
+    // Getters and Setters
+    public String getSurname() {
+        return surname;
+    }
 
-	    public void setVotesReceived(int newNumberOfVotes) { 
-	        this.votesReceived = newNumberOfVotes;
-	    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-	    private static void updateTotalNumberVotes(int newNumberOfVotes) {
-	    	numberTotalVotes += newNumberOfVotes;
-	    }
-	    
-	    public static int getTotalNumberVotes() {
-	    	return numberTotalVotes;
-	    }
-	    
+    public int getVotesReceived() {
+        return votesReceived;
+    }
+
+    public void setVotesReceived(int votesReceived) {
+        // Adjust total votes if the number of votes changes
+        Candidate.totalVotes -= this.votesReceived;  // Subtract the old value
+        this.votesReceived = votesReceived;
+        Candidate.totalVotes += votesReceived;  // Add the new value
+    }
+
+    public static int getTotalVotes() {
+        return totalVotes;
+    }
 }

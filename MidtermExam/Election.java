@@ -1,56 +1,72 @@
-import java.util.Scanner;
-
 public class Election {
 
-	private double percentTotalVotes;
-	private int TotalVotes;
-	
+    private Candidate candidate1;
+    private Candidate candidate2;
+    private Candidate candidate3;
+    private Candidate candidate4;
+    private Candidate candidate5;
 
-	Candidate candidate1 = new Candidate("Johnson", 5000); // Standard single quote
-    Candidate candidate2 = new Candidate("Miller", 4000);
-    Candidate candidate3 = new Candidate("Duffy", 6000);
-    Candidate candidate4 = new Candidate("Robinson", 2500);
-    Candidate candidate5 = new Candidate("Ashton", 1800);
+    // Default constructor: Initializes five candidates with default values
+    public Election() {
+        this.candidate1 = new Candidate();
+        this.candidate2 = new Candidate();
+        this.candidate3 = new Candidate();
+        this.candidate4 = new Candidate();
+        this.candidate5 = new Candidate();
+    }
 
-    private double candidate1votes;
-    private double candidate2votes;
-    private double candidate3votes;
-    private double candidate4votes;
-    private double candidate5votes;
-    
-    
-    public String calculateWinnerTotalVotes() {
-    	int maxCount = Math.max(candidate1.getVotesReceived(), Math.max(Math.max(candidate2.getVotesReceived(), candidate3.getVotesReceived()),Math.max(candidate4.getVotesReceived(), candidate5.getVotesReceived())));
-        if (maxCount == candidate1.getVotesReceived()) {
-            return candidate1.getSurname();
-        } else if (maxCount == candidate2.getVotesReceived()) {
-            return candidate2.getSurname();
-        } else if (maxCount == candidate3.getVotesReceived()) {
-            return candidate3.getSurname();
-        } else if (maxCount == candidate4.getVotesReceived()) {
-            return candidate4.getSurname();    
-        } else {
-            return candidate5.getSurname();
-        }
+    // Non-default constructor: Initializes with five provided candidates
+    public Election(Candidate candidate1, Candidate candidate2, Candidate candidate3, 
+                    Candidate candidate4, Candidate candidate5) {
+        this.candidate1 = candidate1;
+        this.candidate2 = candidate2;
+        this.candidate3 = candidate3;
+        this.candidate4 = candidate4;
+        this.candidate5 = candidate5;
     }
-    
-    private void calculatePercentTotalVotes() {
-    	candidate1votes = (candidate1.getVotesReceived()/19300)*100;
-    	candidate2votes = (candidate2.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate3votes = (candidate3.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate4votes = (candidate4.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
-    	candidate5votes = (candidate5.getVotesReceived()/Candidate.getTotalNumberVotes())*100;
+
+    // Calculate the total votes received by all candidates
+    public int calculateTotalVotes() {
+        return Candidate.getTotalVotes();
     }
-    
-    
+
+    // Calculate percentage of total votes for each candidate
+    public double calculatePercentage(Candidate candidate) {
+        int totalVotes = calculateTotalVotes();
+        if (totalVotes == 0) return 0;
+        return ((double) candidate.getVotesReceived() / totalVotes) * 100;
+    }
+
+    // Determine the candidate with the highest number of votes
+    public String determineWinner() {
+        Candidate winner = candidate1;
+
+        if (candidate2.getVotesReceived() > winner.getVotesReceived()) winner = candidate2;
+        if (candidate3.getVotesReceived() > winner.getVotesReceived()) winner = candidate3;
+        if (candidate4.getVotesReceived() > winner.getVotesReceived()) winner = candidate4;
+        if (candidate5.getVotesReceived() > winner.getVotesReceived()) winner = candidate5;
+
+        return winner.getSurname();
+    }
+
+    // Display election results in tabulated format
     public void displayResults() {
-    	
-    	calculatePercentTotalVotes();
-        System.out.printf("%-30s %-20d %-15f%n", candidate1.getSurname(), candidate1.getVotesReceived(), candidate1votes);
-        System.out.printf("%-30s %-20d %-15f%n", candidate2.getSurname(), candidate2.getVotesReceived(), candidate2votes);
-        System.out.printf("%-30s %-20d %-15f%n", candidate3.getSurname(), candidate3.getVotesReceived(), candidate3votes);
-        System.out.printf("%-30s %-20d %-15f%n", candidate4.getSurname(), candidate4.getVotesReceived(), candidate4votes);
-        System.out.printf("%-30s %-20d %-15f%n", candidate5.getSurname(), candidate5.getVotesReceived(), candidate5votes);
-        System.out.println("Winner is "+calculateWinnerTotalVotes());
+        System.out.printf("%-15s %-15s %-15s%n", "Candidate", "Votes Received", "% of Total Votes");
+        displayCandidateResult(candidate1);
+        displayCandidateResult(candidate2);
+        displayCandidateResult(candidate3);
+        displayCandidateResult(candidate4);
+        displayCandidateResult(candidate5);
+
+        System.out.printf("%-15s %-15d%n", "Total Votes", calculateTotalVotes());
+        System.out.printf("The Winner is %s.%n", determineWinner());
+    }
+
+    // Helper method to display a candidate's result
+    private void displayCandidateResult(Candidate candidate) {
+        System.out.printf("%-15s %-15d %-15.2f%n", 
+                          candidate.getSurname(), 
+                          candidate.getVotesReceived(), 
+                          calculatePercentage(candidate));
     }
 }
