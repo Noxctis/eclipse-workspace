@@ -38,6 +38,7 @@ public class ArrayOfTemperatures
                                    " the average");
         }
         System.out.println("Have a nice week.");
+        keyboard.close();
     }
 }
 
