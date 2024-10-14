@@ -7,8 +7,7 @@ public class ListDemo
 
     public static void main(String[] args)
     {
-        OneWayNoRepeatsList toDoList =
-                            new OneWayNoRepeatsList(MAX_SIZE);
+        OneWayNoRepeatsList toDoList = new OneWayNoRepeatsList(MAX_SIZE);
 							
         System.out.println("Enter items for the list, when prompted.");
         boolean moreEntries = true;
