@@ -7,12 +7,35 @@ public class RandomPINAuthenticator {
 
     // Constructor: Initialize with the actual PIN and generate random mapping
     public RandomPINAuthenticator(int[] pin) {
+        setPin(pin);                 // Use the setter to initialize the PIN
+        this.randomMapping = new int[10]; // Initialize randomMapping array
+        generateRandomMapping();     // Generate the random mapping
+    }
+
+    // Set the PIN with validation to ensure it is 5 digits
+    public void setPin(int[] pin) {
         if (pin.length != 5) {
             throw new IllegalArgumentException("PIN must be exactly 5 digits.");
         }
         this.pin = pin;
-        this.randomMapping = new int[10]; // Random numbers for digits 0-9
-        generateRandomMapping();
+    }
+
+    // Get the PIN
+    public int[] getPin() {
+        return this.pin;
+    }
+
+    // Set the random mapping
+    public void setRandomMapping(int[] mapping) {
+        if (mapping.length != 10) {
+            throw new IllegalArgumentException("Mapping must be exactly 10 digits.");
+        }
+        this.randomMapping = mapping;
+    }
+
+    // Get the random mapping
+    public int[] getRandomMapping() {
+        return this.randomMapping;
     }
 
     // Generate random mapping for the digits 0-9 (each assigned a random number 1-3)
