@@ -1,16 +1,33 @@
+/*
+============================================================================
+FILE : HangmanGUI.java
+AUTHOR : Chrys Sean T. Sevilla
+DESCRIPTION : The progam should be a hangman game.
+COPYRIGHT : 21-10-2024
+REVISION HISTORY
+Date: By: Description:
+revision date author description of the change
+revision date author description of the change
+.
+.
+.
+revision date author description of the change
+============================================================================
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * The HangmanGUI class represents a graphical user interface (GUI) version of the classic Hangman game.
+ * The player attempts to guess a randomly selected word by guessing one letter at a time.
+ * The player loses if they exceed a number of incorrect guesses.
+ */
 public class HangmanGUI extends JFrame {
-    private final static String[] words = {
-            "write", "that", "program", "java", "object", 
-            "class", "inheritance", "encapsulation", 
-            "polymorphism", "abstraction"
-    };
-
+    private String[] words;       // The list of words for the game
     private String selectedWord;  // The selected word for the game
     private String guessedWord;   // Current guessed word with asterisks
     private int misses;           // Counter for incorrect guesses
@@ -21,19 +38,24 @@ public class HangmanGUI extends JFrame {
     private JLabel statusLabel;   // Label to display game status
     private JButton resetButton;  // Button to reset the game
 
-    // Constructor: Initialize the GUI components and game state
-    public HangmanGUI() {
+    /**
+     * Constructor: Initializes the GUI components, the game state, and the word list.
+     * @param words A list of words for the Hangman game.
+     */
+    public HangmanGUI(String[] words) {
+        this.words = words;  // Set the words through the constructor
+        
         setTitle("Hangman Game");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
 
-        // Initialize the game state
-        resetGame();
+        // Initialize GUI components first
+        wordLabel = new JLabel(); // Initialize wordLabel before using it
+        statusLabel = new JLabel("Misses: 0"); // Initialize statusLabel with default text
 
         // Word display panel
         JPanel wordPanel = new JPanel();
-        wordLabel = new JLabel(guessedWord);
         wordLabel.setFont(new Font("Arial", Font.PLAIN, 24));
         wordPanel.add(wordLabel);
 
@@ -47,7 +69,6 @@ public class HangmanGUI extends JFrame {
 
         // Status panel
         JPanel statusPanel = new JPanel();
-        statusLabel = new JLabel("Misses: 0");
         resetButton = new JButton("Reset Game");
         statusPanel.add(statusLabel);
         statusPanel.add(resetButton);
@@ -57,32 +78,18 @@ public class HangmanGUI extends JFrame {
         add(inputPanel, BorderLayout.CENTER);
         add(statusPanel, BorderLayout.SOUTH);
 
-        // Add action listener for the guess button
+        // Initialize the game state after GUI components are set up
+        resetGame();
+
+        // Action listener for the guess button
         guessButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                String input = guessField.getText();
-                if (input.length() == 1) {
-                    char guess = input.charAt(0);
-                    if (!correctGuess(guess)) {
-                        misses++;
-                        statusLabel.setText("Misses: " + misses);
-                    }
-                    wordLabel.setText(guessedWord);
-                    if (isWordFinish()) {
-                        JOptionPane.showMessageDialog(null, "You guessed the word: " + selectedWord);
-                        resetGame();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please enter a single letter.");
-                }
-                guessField.setText("");
+                handleGuess();
             }
         });
 
-        // Add action listener for the reset button
+        // Action listener for the reset button
         resetButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 resetGame();
             }
@@ -91,7 +98,32 @@ public class HangmanGUI extends JFrame {
         setVisible(true);
     }
 
-    // Reset the game state
+    /**
+     * Handles the player's guess input. Updates the game state and checks for the result of the guess.
+     */
+    private void handleGuess() {
+        String input = guessField.getText();
+        if (input.length() == 1) {
+            char guess = input.charAt(0);
+            if (!correctGuess(guess)) {
+                misses++;
+                statusLabel.setText("Misses: " + misses);
+            }
+            wordLabel.setText(guessedWord);
+            if (isWordFinish()) {
+                JOptionPane.showMessageDialog(null, "You guessed the word: " + selectedWord);
+                resetGame();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter a single letter.");
+        }
+        guessField.setText("");
+    }
+
+    /**
+     * Resets the game state, selects a new random word, and sets up the word to be guessed with asterisks.
+     * The number of misses is reset to 0.
+     */
     private void resetGame() {
         Random random = new Random();
         selectedWord = words[random.nextInt(words.length)];
@@ -101,7 +133,9 @@ public class HangmanGUI extends JFrame {
         wordLabel.setText(guessedWord);
     }
 
-    // Fill the guessed word with asterisks
+    /**
+     * Fills the guessed word with asterisks to hide the letters of the selected word.
+     */
     private void fillAsterisk() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < selectedWord.length(); i++) {
@@ -110,7 +144,11 @@ public class HangmanGUI extends JFrame {
         guessedWord = sb.toString();
     }
 
-    // Check if the guessed letter is correct and update the guessed word
+    /**
+     * Checks if the guessed letter is correct and updates the guessed word.
+     * @param guess The guessed letter entered by the player.
+     * @return true if the guessed letter is correct, false otherwise.
+     */
     private boolean correctGuess(char guess) {
         boolean found = false;
         StringBuilder newGuessedWord = new StringBuilder(guessedWord);
@@ -126,13 +164,27 @@ public class HangmanGUI extends JFrame {
         return found;
     }
 
-    // Check if the word has been fully guessed
+    /**
+     * Checks if the word has been fully guessed by the player.
+     * @return true if the word has been fully guessed, false otherwise.
+     */
     private boolean isWordFinish() {
         return !guessedWord.contains("*");
     }
 
-    // Main method to run the game
+    /**
+     * Main method to run the Hangman game.
+     * Creates an instance of HangmanGUI with a custom list of words to start the game.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
-        new HangmanGUI();
+        // Sample word list to be passed into the constructor
+        String[] wordList = {
+            "write", "that", "program", "java", "object", 
+            "class", "inheritance", "encapsulation", 
+            "polymorphism", "abstraction"
+        };
+
+        new HangmanGUI(wordList);
     }
 }
