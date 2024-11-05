@@ -1,12 +1,23 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 /**
- * The Square class represents a square shape with a specified side length, center, and color.
- * It extends the DrawableShape class and provides methods to calculate the area and perimeter,
- * as well as methods to access and modify the side length.
+ * The Square class represents a square shape with specified properties, 
+ * and includes a GUI for interacting with the square.
  */
-public class Square extends DrawableShape {
+public class square extends DrawableShape {
     private int sideLength;  // Length of the sides of the square
+
+    private JTextField centerXField;
+    private JTextField centerYField;
+    private JTextField colorField;
+    private JTextField sideLengthField;
+    private JLabel areaLabel;
+    private JLabel perimeterLabel;
+    private JPanel drawPanel;
 
     /**
      * No-argument constructor to create a Square with default values.
@@ -62,7 +73,6 @@ public class Square extends DrawableShape {
 
     /**
      * Draws the square using keyboard characters, displaying an outline based on the side length.
-     * The drawing simulates the square by printing rows of characters.
      */
     public void draw() {
         System.out.println("Drawing square with color " + color + " at center (" + centerX + ", " + centerY + ")");
@@ -79,33 +89,120 @@ public class Square extends DrawableShape {
     }
 
     /**
-     * Reads input values for the square's properties: center coordinates, color, and side length.
+     * Launches the GUI for interacting with the square.
      */
-    public void readInput() {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Enter the X-coordinate of the square's center: ");
-        setCenterX(scanner.nextInt());
-        
-        System.out.print("Enter the Y-coordinate of the square's center: ");
-        setCenterY(scanner.nextInt());
-        
-        System.out.print("Enter the color of the square: ");
-        setColor(scanner.next());
-        
-        System.out.print("Enter the length of the square's side: ");
-        setSideLength(scanner.nextInt());
+    public void launchGUI() {
+        JFrame frame = new JFrame("Square Properties GUI");
+        frame.setLayout(new BorderLayout());
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Input panel
+        JPanel inputPanel = new JPanel(new GridLayout(5, 2, 5, 5));
+        inputPanel.setBorder(BorderFactory.createTitledBorder("Square Properties"));
+
+        centerXField = new JTextField(String.valueOf(centerX));
+        centerYField = new JTextField(String.valueOf(centerY));
+        colorField = new JTextField(color);
+        sideLengthField = new JTextField(String.valueOf(sideLength));
+
+        inputPanel.add(new JLabel("Center X:"));
+        inputPanel.add(centerXField);
+        inputPanel.add(new JLabel("Center Y:"));
+        inputPanel.add(centerYField);
+        inputPanel.add(new JLabel("Color:"));
+        inputPanel.add(colorField);
+        inputPanel.add(new JLabel("Side Length:"));
+        inputPanel.add(sideLengthField);
+
+        JButton calculateButton = new JButton("Calculate & Draw");
+        inputPanel.add(calculateButton);
+
+        frame.add(inputPanel, BorderLayout.NORTH);
+
+        // Output panel for area and perimeter
+        JPanel outputPanel = new JPanel(new GridLayout(2, 1));
+        outputPanel.setBorder(BorderFactory.createTitledBorder("Output"));
+
+        areaLabel = new JLabel("Area: ");
+        perimeterLabel = new JLabel("Perimeter: ");
+        outputPanel.add(areaLabel);
+        outputPanel.add(perimeterLabel);
+
+        frame.add(outputPanel, BorderLayout.CENTER);
+
+        // Panel to draw the square
+        drawPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                drawSquare(g);
+            }
+        };
+        drawPanel.setPreferredSize(new Dimension(200, 200));
+        drawPanel.setBackground(Color.WHITE);
+        frame.add(drawPanel, BorderLayout.SOUTH);
+
+        // Action listener for Calculate & Draw button
+        calculateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculateAndDrawSquare();
+            }
+        });
+
+        frame.setVisible(true);
     }
 
     /**
-     * Outputs the square's properties, including center coordinates, color, side length, area, and perimeter.
+     * Reads input, calculates area and perimeter, and triggers the draw.
      */
-    public void writeOutput() {
-        System.out.println("Square Properties:");
-        System.out.println("Center: (" + getCenterX() + ", " + getCenterY() + ")");
-        System.out.println("Color: " + getColor());
-        System.out.println("Side Length: " + getSideLength());
-        System.out.println("Area: " + calculateArea());
-        System.out.println("Perimeter: " + calculatePerimeter());
+    private void calculateAndDrawSquare() {
+        try {
+            centerX = Integer.parseInt(centerXField.getText());
+            centerY = Integer.parseInt(centerYField.getText());
+            color = colorField.getText();
+            sideLength = Integer.parseInt(sideLengthField.getText());
+
+            areaLabel.setText("Area: " + calculateArea());
+            perimeterLabel.setText("Perimeter: " + calculatePerimeter());
+
+            // Repaint to trigger drawing the square
+            drawPanel.repaint();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Please enter valid numbers for center coordinates and side length.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Draws a representation of the square on the drawPanel based on current properties.
+     * @param g Graphics object used to draw the square.
+     */
+    private void drawSquare(Graphics g) {
+        try {
+            // Calculate top-left corner to center the square around the specified coordinates
+            int x = centerX - sideLength / 2;
+            int y = centerY - sideLength / 2;
+
+            // Set color if specified; default to black
+            Color squareColor = Color.BLACK;
+            try {
+                squareColor = (Color) Color.class.getField(color.toLowerCase()).get(null);
+            } catch (Exception e) {
+                // Default to black if color is invalid
+            }
+
+            g.setColor(squareColor);
+            g.drawRect(x, y, sideLength, sideLength);
+        } catch (NumberFormatException e) {
+            // Ignore invalid values during drawing
+        }
+    }
+
+    /**
+     * Main method to launch the GUI application for the Square.
+     */
+    public static void main(String[] args) {
+        Square square = new Square();
+        square.launchGUI();
     }
 }
