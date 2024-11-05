@@ -74,6 +74,7 @@ public class Square extends DrawableShape {
     /**
      * Draws the square using keyboard characters, displaying an outline based on the side length.
      */
+    @Override
     public void draw() {
         System.out.println("Drawing square with color " + color + " at center (" + centerX + ", " + centerY + ")");
         for (int i = 0; i < sideLength; i++) {
