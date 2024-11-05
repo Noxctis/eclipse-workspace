@@ -8,7 +8,7 @@ import java.util.Scanner;
  * The Square class represents a square shape with specified properties, 
  * and includes a GUI for interacting with the square.
  */
-public class square extends DrawableShape {
+public class Square extends DrawableShape {
     private int sideLength;  // Length of the sides of the square
 
     private JTextField centerXField;
