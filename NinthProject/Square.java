@@ -190,6 +190,7 @@ public class Square extends DrawableShape {
 
             g.setColor(squareColor);
             g.drawRect(x, y, sideLength, sideLength);
+            g.fillRect(x ,y, sideLength, sideLength);
         } catch (NumberFormatException e) {
             // Ignore invalid values during drawing
         }
