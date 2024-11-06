@@ -1,8 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import javax.swing.*;
 
 /**
  * The Square class represents a square shape with specified properties, 
@@ -101,7 +100,6 @@ public class Square extends DrawableShape {
         // Input panel
         JPanel inputPanel = new JPanel(new GridLayout(5, 2, 5, 5));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Square Properties"));
-
         centerXField = new JTextField(String.valueOf(centerX));
         centerYField = new JTextField(String.valueOf(centerY));
         colorField = new JTextField(color);
@@ -124,14 +122,12 @@ public class Square extends DrawableShape {
         // Output panel for area and perimeter
         JPanel outputPanel = new JPanel(new GridLayout(2, 1));
         outputPanel.setBorder(BorderFactory.createTitledBorder("Output"));
-
         areaLabel = new JLabel("Area: ");
         perimeterLabel = new JLabel("Perimeter: ");
         outputPanel.add(areaLabel);
         outputPanel.add(perimeterLabel);
 
         frame.add(outputPanel, BorderLayout.CENTER);
-
         // Panel to draw the square
         drawPanel = new JPanel() {
             @Override
