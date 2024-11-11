@@ -8,17 +8,15 @@ public class TextFileInputDemo
     public static void main(String[] args)
     {
         String fileName = "out.txt";
-        String file2 ="output.txt";
+        String newfileName = "output.txt";
         Scanner inputStream = null;
         PrintWriter outputStream = null;
-        
-        System.out.println("The file " + fileName + 
+        System.out.println("The file " + newfileName + 
                            "\ncontains the following lines:\n");
                            
        try
        {
            inputStream = new Scanner(new File(fileName));
-           outputStream = new PrintWriter(file2);
        }
        catch(FileNotFoundException e)
        {
@@ -27,13 +25,29 @@ public class TextFileInputDemo
            System.exit(0);
        }
        
+       try //new file
+       {
+       outputStream = new PrintWriter(newfileName);
+       }
+       catch(FileNotFoundException e)
+       {
+       System.out.println("Error opening the file " + 
+       newfileName);
+       System.exit(0);
+       }
+       
        while (inputStream.hasNextLine())
        {
            String line = inputStream.nextLine();
-           System.out.println(line);
-           outputStream.println(" "+ line);
+//           for (int count = 1; count <= 3; count++)
+//           {
+               outputStream.println(line);
+       
        }
+       
        inputStream.close();
        outputStream.close();
+
+   }
+       
     }
-}
