@@ -1,34 +1,76 @@
 import java.util.Scanner;
-
+/**
+ * Abstract class representing a bank account.
+ */
 abstract class BankAccount {
     protected double balance;
 
+    /**
+     * Constructor to initialize the balance of the bank account.
+     * 
+     * @param balance Initial balance of the bank account.
+     */
     public BankAccount(double balance) {
         this.balance = balance;
     }
 
+    /**
+     * Gets the current balance of the bank account.
+     * 
+     * @return The current balance.
+     */
     public double getBalance() {
         return balance;
     }
 
+    /**
+     * Abstract method to deposit an amount into the bank account.
+     * 
+     * @param amount The amount to deposit.
+     */
     public abstract void deposit(double amount);
+
+    /**
+     * Abstract method to withdraw an amount from the bank account.
+     * 
+     * @param amount The amount to withdraw.
+     */
     public abstract void withdraw(double amount);
 }
 
+/**
+ * Class representing a savings account.
+ */
 class SavingsAccount extends BankAccount {
     private double interestRate;
 
+    /**
+     * Constructor to initialize the balance and interest rate of the savings account.
+     * 
+     * @param balance Initial balance of the savings account.
+     * @param interestRate Interest rate for the savings account.
+     */
     public SavingsAccount(double balance, double interestRate) {
         super(balance);
         this.interestRate = interestRate;
     }
 
+    /**
+     * Deposits an amount into the savings account and adds interest.
+     * 
+     * @param amount The amount to deposit.
+     */
     @Override
     public void deposit(double amount) {
         balance += amount + (amount * interestRate / 100);
         System.out.println("Deposited " + amount + " with interest to Savings Account. New balance: " + balance);
     }
 
+    /**
+     * Withdraws an amount from the savings account if sufficient balance is available.
+     * 
+     * @param amount The amount to withdraw.
+     */
     @Override
     public void withdraw(double amount) {
         if (balance >= amount) {
@@ -40,22 +82,42 @@ class SavingsAccount extends BankAccount {
     }
 }
 
+/**
+ * Class representing a current account.
+ */
 class CurrentAccount extends BankAccount {
     private double overdraftLimit;
     private double overdraftFee;
 
+    /**
+     * Constructor to initialize the balance, overdraft limit, and overdraft fee of the current account.
+     * 
+     * @param balance Initial balance of the current account.
+     * @param overdraftLimit Overdraft limit for the current account.
+     * @param overdraftFee Overdraft fee for the current account.
+     */
     public CurrentAccount(double balance, double overdraftLimit, double overdraftFee) {
         super(balance);
         this.overdraftLimit = overdraftLimit;
         this.overdraftFee = overdraftFee;
     }
 
+    /**
+     * Deposits an amount into the current account.
+     * 
+     * @param amount The amount to deposit.
+     */
     @Override
     public void deposit(double amount) {
         balance += amount;
         System.out.println("Deposited " + amount + " to Current Account. New balance: " + balance);
     }
 
+    /**
+     * Withdraws an amount from the current account if sufficient balance or overdraft limit is available.
+     * 
+     * @param amount The amount to withdraw.
+     */
     @Override
     public void withdraw(double amount) {
         if (balance >= amount) {
@@ -71,6 +133,9 @@ class CurrentAccount extends BankAccount {
     }
 }
 
+/**
+ * Class to test the functionality of BankAccount, SavingsAccount, and CurrentAccount.
+ */
 public class BankAccountTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
