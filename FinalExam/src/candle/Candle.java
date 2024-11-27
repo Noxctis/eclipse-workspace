@@ -1,4 +1,3 @@
-package candle;
 
 public class Candle {
     private String color;

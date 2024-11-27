@@ -1,4 +1,3 @@
-package candle;
 
 public class DemoCandles {
        public static void main(String[] args) {

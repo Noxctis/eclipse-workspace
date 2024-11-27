@@ -1,4 +1,3 @@
-package candle;
 
 public class ScentedCandle extends Candle {
     private String scent;
@@ -10,11 +9,13 @@ public class ScentedCandle extends Candle {
 
     public ScentedCandle(String color, double height) {
         super(color, height);
+        this.price = height * 3;
         this.scent = "Unknown";
     }
 
     public ScentedCandle(String color, double height, String scent) {
         super(color, height);
+        this.price = height * 3;
         this.scent = scent;
     }
 
