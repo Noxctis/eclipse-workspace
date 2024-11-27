@@ -3,6 +3,7 @@ public class Candle {
     private String color;
     private double height;
     protected double price;
+    private double PPI = 2;
 
     public Candle() {
         this.color = "Unknown";
@@ -13,7 +14,7 @@ public class Candle {
     public Candle(String color, double height) {
         this.color = color;
         this.height = height;
-        this.price = height * 2;
+        this.price = height * PPI;
     }
 
     public double getHeight() {
@@ -26,7 +27,7 @@ public class Candle {
 
     public void setHeight(double height) {
         this.height = height;
-        this.price = height * 2;
+        this.price = height * PPI;
     }
 
     public String getColor() {

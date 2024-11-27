@@ -1,6 +1,7 @@
 
 public class ScentedCandle extends Candle {
     private String scent;
+    private double PPI = 3;
 
     public ScentedCandle() {
         super();
@@ -9,13 +10,13 @@ public class ScentedCandle extends Candle {
 
     public ScentedCandle(String color, double height) {
         super(color, height);
-        this.price = height * 3;
+        this.price = height * PPI;
         this.scent = "Unknown";
     }
 
     public ScentedCandle(String color, double height, String scent) {
         super(color, height);
-        this.price = height * 3;
+        this.price = height * PPI;
         this.scent = scent;
     }
 
@@ -26,7 +27,7 @@ public class ScentedCandle extends Candle {
     @Override
     public void setHeight(double height) {
         super.setHeight(height);
-        this.price = height * 3;
+        this.price = height * PPI;
     }
 
     public void setScent(String scent) {
