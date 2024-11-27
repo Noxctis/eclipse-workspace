@@ -3,7 +3,7 @@ public class Candle {
     private String color;
     private double height;
     protected double price;
-    private double PPI = 2;
+    private final double PPI = 2; // Price Per Inch
 
     public Candle() {
         this.color = "Unknown";

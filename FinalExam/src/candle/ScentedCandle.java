@@ -1,7 +1,7 @@
 
 public class ScentedCandle extends Candle {
     private String scent;
-    private double PPI = 3;
+    private final double PPI = 3; // Price Per Inch
 
     public ScentedCandle() {
         super();
