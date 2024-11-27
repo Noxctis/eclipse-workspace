@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class UseMusic {
+
     private static MusicArray musicArray;
 
     public static void main(String[] args) {

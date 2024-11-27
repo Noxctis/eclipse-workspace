@@ -25,4 +25,5 @@ public abstract class Music {
 
     public abstract void setPrice(double price);
     public abstract void setPrice();
+    
 }
