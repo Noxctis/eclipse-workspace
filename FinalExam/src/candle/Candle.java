@@ -2,7 +2,7 @@
 public class Candle {
     private String color;
     private double height;
-    protected double price;
+    private double price;
     private final double PPI = 2; // Price Per Inch
 
     public Candle() {
@@ -26,6 +26,11 @@ public class Candle {
     }
 
     public void setHeight(double height) {
+        this.height = height;
+        this.price = height * this.PPI;
+    }
+
+    public void setHeight(double height, double PPI) {
         this.height = height;
         this.price = height * PPI;
     }
